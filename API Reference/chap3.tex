@@ -2,7 +2,7 @@
 %	CHAPTER 3
 %----------------------------------------------------------------------------------------
 \chapter{API Reference}
- 
+
 %\section{Driver}\index{Driver}
 %
 %\section{API}\index{API}
@@ -10,17 +10,68 @@
 \subsection{open(index)}\index{open}
 \subsection{write(msg)}\index{write}
 \subsection{read(bytenum)}\index{read}
-\subsection{asg\_create\_input\_buf()}\index{asg\_create\_input\_buf}
-\subsection{asg\_program\_all()}\index{asg\_program\_all}
+This function  
+\subsection{asg\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num,
+ \newline unsigned char **buf , int *buf\_length)}\index{asg\_create\_input\_buf}
+User don't use this function!
+\subsection{asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, 
+\newline unsigned char **buf , int *buf\_length)}\index{asg\_program\_all}
+This function writes the pulse data to the board and tells the board to start programming the device.For the device,the method of programming follows the following form:
+\newline
+    \begin{table}[H]
+    \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Parameters}&\textbf{Description}\\
+            \hline
+            char **flags&\tabincell{l}{The "flags" is a two-dimensional char array,the first dimension represents the length \\of pulses data,and the second dimension is a string such as "10100101",which \\represents the 8 output channels.}\\
+            \hline
+            double *time\_length&\tabincell{l}{The "time\_length" is a double array,which represents the time length of the pulse\\condition in nanoseconds.The length of the array must be equal to the length of \\"flags" array.}\\
+            \hline
+            unsigned long cmd\_num&\tabincell{l}{The cmd\_num is an integer that represents the number of pulse condition.}\\
+            \hline
+            unsigned char **buf&\tabincell{l}{The "buf" is a two-dimensional char array.The length of first dimension is 8,the \\length of second dimension is 10 times of "cmd\_num".}\\
+            \hline
+            int *buf\_length&\tabincell{l}{The "buf\_length" is an integer array as \{0,0,0,0,0,0,0,0\}.}\\
+            \hline
+        \end{tabular}
+    \end{table}
 \subsection{asg\_start\_programming()}\index{asg\_start\_programming}
 \subsection{asg\_program\_one()}\index{asg\_program\_one}
 \subsection{asg\_stop\_programming()}\index{asg\_stop\_programming}
 
-\subsection{asg\_counter\_create\_input\_buf()}\index{asg\_counter\_create\_input\_buf}
-\subsection{asg\_counter\_program\_all()}\index{asg\_counter\_program\_all}
+\subsection{asg\_counter\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num, 
+\newline unsigned char **buf , int *buf\_length)}\index{asg\_counter\_create\_input\_buf}
+User don't use this function!
+\subsection{asg\_counter\_program\_all(char **flags, double *time\_length,unsigned long cmd\_num,
+unsigned char **buf , int *buf\_length)}\index{asg\_counter\_program\_all}
+This function writes the count data to the board and tells the board to start programming the device.For the device,the method of programming follows the following form:
+\newline
+    \begin{table}[H]
+    \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
+        \centering
+        \begin{tabular}{|c|c|}
+            \hline
+            \textbf{Parameters}&\textbf{Description}\\
+            \hline
+            char **flags&\tabincell{l}{The "flags" is a two-dimensional char array,the first dimension represents the \\length of count data,and the second dimension is a string such as "1",which \\represents the count channel.}\\
+            \hline
+             int *time\_length&\tabincell{l}{The "time\_length" is an integer array,which represents the length of the count \\ condition in nanoseconds.The length of the array must be equal to the length \\of "flags" array.}\\
+            \hline
+            unsigned long cmd\_num&\tabincell{l}{The cmd\_num is an integer that represents the number of count condition.}\\
+            \hline
+            unsigned char **buf&\tabincell{l}{The "buf" is a two-dimensional char array.The length of first dimension is 1,\\the length of second dimension is 10 times of "cmd\_num".}\\
+            \hline
+            int *buf\_length&\tabincell{l}{The "buf\_length" is an integer array as \{0\}.}\\
+            \hline
+        \end{tabular}
+    \end{table}
 \subsection{asg\_counter\_start\_programming()}\index{asg\_counter\_start\_programming}
 \subsection{asg\_counter\_program\_one()}\index{asg\_counter\_program\_one}
 \subsection{asg\_counter\_stop\_programming()}\index{asg\_counter\_stop\_programming}
 
 \subsection{asg\_start()}\index{asg\_start}
+This function sends a trigger to the board.This trigger will start execution of a pulse program as well as the count program.
 \subsection{asg\_stop()}\index{asg\_stop}
+This function stops output of board.This function also make the board back to idle condition so that the board can be run again using \textbf{asg\_start()}.
