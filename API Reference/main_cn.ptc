@@ -1,0 +1,81 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {english}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{\@mypartnumtocformat {I}{Part One}}{5}{part.1}
+\ttl@starttoc {default@1}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {1}Introduction}{7}{chapter.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.1}Before Starting}{7}{section.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.2}Data Structure}{7}{section.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.3}Python Code Examples}{7}{section.1.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.1}Pulse Download and Start}{7}{subsection.1.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.3.2}Counter Data Readout}{7}{subsection.1.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.4}C Code Examples}{7}{section.1.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4.1}Pulse Download and Start}{7}{subsection.1.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.4.2}Counter Data Readout}{7}{subsection.1.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {1.5}Labview Examples}{7}{section.1.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.5.1}Pulse Download and Start}{7}{subsection.1.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {1.5.2}Counter Data Readout}{7}{subsection.1.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {2}File List}{9}{chapter.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.1}Driver}{9}{section.2.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.2}API}{9}{section.2.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {2.3}Examples}{9}{section.2.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {part}{\@mypartnumtocformat {II}{Part Two}}{11}{part.2}
+\ttl@stoptoc {default@1}
+\ttl@starttoc {default@2}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}API Reference}{13}{chapter.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.1}open(index)}{13}{subsection.3.0.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.2}write(msg)}{13}{subsection.3.0.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.3}read(bytenum)}{13}{subsection.3.0.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.4}asg\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num, \newline unsigned char **buf , int *buf\_length)}{13}{subsection.3.0.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.5}asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, \newline unsigned char **buf , int *buf\_length)}{13}{subsection.3.0.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.6}asg\_start\_programming()}{14}{subsection.3.0.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.7}asg\_program\_one()}{14}{subsection.3.0.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.8}asg\_stop\_programming()}{14}{subsection.3.0.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.9}asg\_counter\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf , int *buf\_length)}{14}{subsection.3.0.9}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.10}asg\_counter\_program\_all(char **flags, double *time\_length,unsigned long cmd\_num, unsigned char **buf , int *buf\_length)}{14}{subsection.3.0.10}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.11}asg\_counter\_start\_programming()}{15}{subsection.3.0.11}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.12}asg\_counter\_program\_one()}{15}{subsection.3.0.12}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.13}asg\_counter\_stop\_programming()}{15}{subsection.3.0.13}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.14}asg\_start()}{15}{subsection.3.0.14}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {3.0.15}asg\_stop()}{15}{subsection.3.0.15}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\leavevmode {\color {ocre}Bibliography}}{17}{chapter*.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Books}{17}{section*.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{Articles}{17}{section*.4}
+\contentsfinish 

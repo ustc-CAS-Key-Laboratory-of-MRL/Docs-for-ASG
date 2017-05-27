@@ -8,32 +8,33 @@
 %\section{API}\index{API}
 
 \subsection{open(index)}\index{open}
+当用户在同一台计算机上连接多个任意序列发生器时，可以调用此函数来选择所要控制的一台设备。
 \subsection{write(msg)}\index{write}
+用户可以调用此函数来向设备发送指令，如发送“\x00\x00”的时候即为控制设备回到初始化状态。
 \subsection{read(bytenum)}\index{read}
-This function  
 \subsection{asg\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num,
  \newline unsigned char **buf , int *buf\_length)}\index{asg\_create\_input\_buf}
-User don't use this function!
-\subsection{asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, 
+用户请勿使用此函数！
+\subsection{asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num,
 \newline unsigned char **buf , int *buf\_length)}\index{asg\_program\_all}
-This function writes the pulse data to the board and tells the board to start programming the device.For the device,the method of programming follows the following form:
+用户可以使用此函数将自定义方波序列的数据写入到硬件中，然后通过调用\textbf{asg\_start()}函数，即可让任意序列发生器播放用户自定义的方波序列。调用此函数的传入参数如下表：
 \newline
     \begin{table}[H]
     \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            \textbf{Parameters}&\textbf{Description}\\
+            \textbf{传入参数}&\textbf{参数描述}\\
             \hline
-            char **flags&\tabincell{l}{The "flags" is a two-dimensional char array,the first dimension represents the length \\of pulses data,and the second dimension is a string such as "10100101",which \\represents the 8 output channels.}\\
+            char **flags&\tabincell{l}{参数“flags”是一个二维字符数组，即每个元素均为形如\\“01011010”的字符串。字符串的个数代表方波序列数据\\个数,字符串中的‘0’或‘1’从左到右依次代表8个方波\\输出通道的状态。}\\
             \hline
-            double *time\_length&\tabincell{l}{The "time\_length" is a double array,which represents the time length of the pulse\\condition in nanoseconds.The length of the array must be equal to the length of \\"flags" array.}\\
+            double *time\_length&\tabincell{l}{参数“time\_length”是一个double型的数组。每个元素代\\表相应的每个方波序列状态的时间长度，单位为纳秒。该\\数组长度必须与“flags”的数组长度相同。}\\
             \hline
-            unsigned long cmd\_num&\tabincell{l}{The cmd\_num is an integer that represents the number of pulse condition.}\\
+            unsigned long cmd\_num&\tabincell{l}{参数“cmd\_num”是一正整数,表示方波序列数据的个数。}\\
             \hline
-            unsigned char **buf&\tabincell{l}{The "buf" is a two-dimensional char array.The length of first dimension is 8,the \\length of second dimension is 10 times of "cmd\_num".}\\
+            unsigned char **buf&\tabincell{l}{参数“buf”是一个二维\textbf{空字符}数组。即每个元素为一个\\字符串，字符串的个数为8，每个字符串的长度为cmd\_num\\的10倍。}\\
             \hline
-            int *buf\_length&\tabincell{l}{The "buf\_length" is an integer array as \{0,0,0,0,0,0,0,0\}.}\\
+            int *buf\_length&\tabincell{l}{参数“buf\_length”是一个整数数组，即\{0,0,0,0,0,0,0,0\}。}\\
             \hline
         \end{tabular}
     \end{table}
@@ -41,29 +42,29 @@ This function writes the pulse data to the board and tells the board to start pr
 \subsection{asg\_program\_one()}\index{asg\_program\_one}
 \subsection{asg\_stop\_programming()}\index{asg\_stop\_programming}
 
-\subsection{asg\_counter\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num, 
-\newline unsigned char **buf , int *buf\_length)}\index{asg\_counter\_create\_input\_buf}
-User don't use this function!
+\subsection{asg\_counter\_create\_input\_buf(char **flags, double *time\_length, unsigned long cmd\_num,
+unsigned char **buf , int *buf\_length)}\index{asg\_counter\_create\_input\_buf}
+用户请勿使用此函数！
 \subsection{asg\_counter\_program\_all(char **flags, double *time\_length,unsigned long cmd\_num,
 unsigned char **buf , int *buf\_length)}\index{asg\_counter\_program\_all}
-This function writes the count data to the board and tells the board to start programming the device.For the device,the method of programming follows the following form:
+用户可以使用此函数将自定义计数序列的数据写入到硬件中，然后通过调用\textbf{asg\_start()}函数，即可使用任意序列发生器的计数功能。调用此函数的传入参数如下表：
 \newline
     \begin{table}[H]
     \newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}
         \centering
         \begin{tabular}{|c|c|}
             \hline
-            \textbf{Parameters}&\textbf{Description}\\
+            \textbf{传入参数}&\textbf{参数描述}\\
             \hline
-            char **flags&\tabincell{l}{The "flags" is a two-dimensional char array,the first dimension represents the \\length of count data,and the second dimension is a string such as "1",which \\represents the count channel.}\\
+            char **flags&\tabincell{l}{参数“flags”是一个二维字符数组，即每个元素均为形如\\“0”的字符串。字符串的个数代表计数序列数据的个数,\\字符串中的‘0’或‘1’代表计数通道的状态。}\\
             \hline
-             int *time\_length&\tabincell{l}{The "time\_length" is an integer array,which represents the length of the count \\ condition in nanoseconds.The length of the array must be equal to the length \\of "flags" array.}\\
+            double *time\_length&\tabincell{l}{参数“time\_length”是一个double型的数组。每个元素代表\\相应的每个计数序列状态的时间长度，单位为纳秒。该数\\组长度必须与“flags”的数组长度相同。}\\
             \hline
-            unsigned long cmd\_num&\tabincell{l}{The cmd\_num is an integer that represents the number of count condition.}\\
+            unsigned long cmd\_num&\tabincell{l}{参数“cmd\_num”是一正整数,表示计数序列数据的个数。}\\
             \hline
-            unsigned char **buf&\tabincell{l}{The "buf" is a two-dimensional char array.The length of first dimension is 1,\\the length of second dimension is 10 times of "cmd\_num".}\\
+            unsigned char **buf&\tabincell{l}{参数“buf”是一个二维\textbf{空字符}数组。即每个元素为一个字\\符串，字符串的个数为1，每个字符串的长度为cmd\_num\\的10倍。}\\
             \hline
-            int *buf\_length&\tabincell{l}{The "buf\_length" is an integer array as \{0\}.}\\
+            int *buf\_length&\tabincell{l}{参数“buf\_length”是一个整数数组，即\{0\}。}\\
             \hline
         \end{tabular}
     \end{table}
@@ -72,6 +73,7 @@ This function writes the count data to the board and tells the board to start pr
 \subsection{asg\_counter\_stop\_programming()}\index{asg\_counter\_stop\_programming}
 
 \subsection{asg\_start()}\index{asg\_start}
-This function sends a trigger to the board.This trigger will start execution of a pulse program as well as the count program.
+用户可以调用此函数向设备发送一条指令，该指令可以使任意序列发生器开始输出方波序列。若有计数序列则可以使用计数功能。
 \subsection{asg\_stop()}\index{asg\_stop}
-This function stops output of board.This function also make the board back to idle condition so that the board can be run again using \textbf{asg\_start()}.
+用户可以调用此函数向设备发送一条指令，该指令可以使任意序列发生器回到初始状态（若正在输出方波序列则停止输出，若正在计数则停止计数）。在调用此函数后，重新调用\textbf{asg\_start()}即可再次使任意序列发生器输出方波序列。
+
