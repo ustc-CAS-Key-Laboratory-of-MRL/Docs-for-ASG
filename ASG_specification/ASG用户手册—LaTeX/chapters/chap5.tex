@@ -15,7 +15,7 @@
 \newpage
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}start()}
 
-函数没有传入参数，在调用PB\_type\_program( )与Counter\_program( )后，再调用start( )即可向硬件发送指令使仪器开始播放方波序列以及开始计数。
+函数没有传入参数，调用PB\_type\_program( )与Counter\_program( )后，再调用start( )即可向硬件发送指令使仪器开始播放方波序列以及开始计数。
 \vspace{0.4cm}
 
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}stop()}
@@ -35,9 +35,9 @@
 
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{完整调用过程举例}}
 
-pulse = [[`10000000',0,0,60],[`00000000',0,0,40.05]]\qquad \#  定义方波序列
+pulse = [[`10000000',0,0,60],[`00000000',0,0,40.05]]\qquad  \#  定义方波序列
 
-counter\_pulse = [[`1',0,0,60], [`0',0,0,15] ]\qquad        \#  定义计数通道使能序列
+counter\_pulse = [[`1',0,0,60], [`0',0,0,15] ]       \qquad  \#  定义计数通道使能序列
 
 PB\_type\_program(pulse)\qquad            \#  下载方波序列
 
@@ -45,9 +45,9 @@ Counter\_program(counter\_pulse)\qquad     \#  下载方波序列
 
 Start( )\qquad          \#  开始播放序列并开始计数
 
-Continuous\_counter\_result = get\_default\_count()\qquad    \#  获得连续计数结果
+Continuous\_counter\_result = get\_count()\qquad    \#  获得连续计数结果
 
-Counter\_result = get\_all\_count()\qquad                  \#  获得计数结果
+Counter\_result = get\_all\_count()\qquad           \#  获得计数结果
 
 Stop( )\qquad     \#  停止播放序列并停止计数，仅在需要停止播放或计数时使用
 
@@ -56,14 +56,15 @@ Stop( )\qquad     \#  停止播放序列并停止计数，仅在需要停止播�
 
 \newpage
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}asg\_program\_all(char **flags,double *time\_length,unsigned long cmd\_num,\\unsigned char **buf,int *buf\_length)}
+%\vspace{0.4cm}
 \begin{table}[H]
 %\begin{table}[!htbp]
-\Large
+\normalsize
 %\caption{}
-\rowcolors{2}{gray!10}{gray!10}
+%\rowcolors{2}{gray!10}{gray!10}
 \begin{tabular}{|m{7cm}<{\centering}|m{7cm}|}
 %\begin{tabular}{p{0.5\textwidth}|p{0.5\textwidth}}
-\rowcolor{gray!50}
+\rowcolor{blue!50}
 \hline
 传入参数 & \makebox[7cm][c]{参数描述} \\ \hline
 char **flags & 参数“flags”是一个二维数组，每个元素均为形如“01011010”的字符串。字符串个数代表方波数据的个数，字符串中的‘0’或‘1’从左往右依次代表8个方波输出通道的的状态。‘0’ 代表低电平，‘1’ 代表高电平。\\ \hline
@@ -74,14 +75,15 @@ int *buf\_length & 参数“buf\_length”必须是\{0,0,0,0,0,0,0,0\}。 \\\hli
 \end{tabular}
 \end{table}
 
-\newpage
+%\newpage
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}asg\_counter\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf,int *buf\_length)}
+%\vspace{0.4cm)
 \begin{table}[H]
-\Large
+\normalsize
 %\caption{}
-\rowcolors{2}{gray!10}{gray!10}
+%\rowcolors{2}{gray!10}{gray!10}
 \begin{tabular}{|m{7cm}<{\centering}|m{7cm}|}
-\rowcolor{gray!50}
+\rowcolor{blue!50}
 \hline
 传入参数 & \makebox[7cm][c]{参数描述} \\ \hline
 char **flags & 参数“flags”是一个二维数组，即每个元素均为形如“0”的字符串。字符串的个数代表方波的个数，字符串中的‘0’或‘1’代表计数通道使能序列的状态，‘0’代表低电平，‘1’代表高电平。\\ \hline
@@ -93,27 +95,28 @@ int *buf\_length & 参数“buf\_length”必须是\{0\}。 \\\hline
 \end{table}
 \vspace{0.4cm}
 
+%\newpage
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}asg\_start( )}
 
-此函数没有传入参数,调用asg\_program\_all( )与asg\_counter\_program\_all( )后，再调用asg\_start( )即可向硬件发送指令使仪器开始播放方波序列以及开始计数。
+此函数无传入参数,调用asg\_program\_all( )与asg\_counter\_program\_all()后，再调用asg\_start( )即可向硬件发送指令使仪器开始播放方波序列以及开始计数。
 
 \newpage
 \noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{函数}asg\_stop( )}
 
- 此函数没有传入参数，用来向硬件发送指令，使仪器停止播放方波，并停止计数。在调用asg\_stop( )之后再次调用asg\_start( )可以重新使仪器播放方波序列并开始计数。
+ 此函数无传入参数，用来向硬件发送指令，使仪器停止播放方波，并停止计数。在调用asg\_stop( )之后再次调用asg\_start( )可以重新使仪器播放方波序列并开始计数。
 
 \section{\heiti 两种接口程序比较}
 
 现将Python接口程序与C接口程序中用户需要调用的函数做一对比，方便用户更好的理解调用接口程序的过程。
 \begin{table}[H]
-\Large
+\normalsize
 %\caption{}
 %\rowcolors{2}{gray!10}{gray!10}
 \begin{tabular}{|m{1.5cm}<{\centering}|m{5cm}<{\centering}|m{6.5cm}|}
-\rowcolor{gray!50}
+\rowcolor{blue!50}
 \hline
-接口程序 & \makebox[6.6cm][l]{\qquad \qquad Python} & \makebox[6.0cm][c]{C}\\ \hline
-\vspace{5cm}\multirow{4}{1in}{函数名} & PB\_type\_program(pulse)用来将方波数据下载到硬件中。& asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf, int *buf\_length)用来将方波数据下载到硬件中。\\\cline{2-3}
+接口程序 & \makebox[6.6cm][l]{\qquad\qquad\qquad Python} & \makebox[6.0cm][c]{C}\\ \hline
+\vspace{1.8cm}\multirow{4}{1in}{\hspace{0.15cm} 函数名} & PB\_type\_program(pulse)用来将方波数据下载到硬件中。& asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf, int *buf\_length)用来将方波数据下载到硬件中。\\\cline{2-3}
 &Counter\_program(pulse)用来将计数通道使能序列数据下载到硬件中。& asg\_counter\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf, int *buf\_length)用来将计数通道使能序列数据下载到硬件中。\\\cline{2-3}
 &start( )用来开始播放方波并开始计数。& asg\_start( )用来开始播放方波并开始计数。\\\cline{2-3}
 &stop( )用来停止播放方波并停止计数。& asg\_stop( )用来停止播放方波并停止计数。\\
