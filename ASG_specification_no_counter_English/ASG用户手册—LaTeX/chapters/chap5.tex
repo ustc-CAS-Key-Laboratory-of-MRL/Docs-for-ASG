@@ -1,0 +1,137 @@
+\chapter{\heiti Calling Interface Program}
+\section{\heiti{API written in Python}}
+We provide API written in Python, so that users can call the program to define the sequence, then they can download the data into the device and play the sequence. Users can refer to the file “DDR3\_USB\_8chn\_Continue\_counter.py”  when they want to call functions from the interface program. The description of the functions is shown as follow. Don't forget that the dynamic range of single pulse is from 7.5 ns to 2.6 s, and the time length must be integral multiple of 0.05 ns.
+%我司为用户提供了Python接口程序。用户可调用接口程序中的函数自己编程生成方波序列，并将其下载到硬件中，然后通过调用函数控制仪器播放自定义的方波序列。使用Python接口程序中的函数时可以参考我司为用户提供的“DDR3\_USB\_8chn\_Continue\_counter.py”文件中的调用方式。现将用户所需的函数列出，并加以解释。注意在调用接口程序中的函数时，定义的单个方波序列高低电平时间必须在7.5 ns 至2.6 s 之间，且必须是0.05 ns的整数倍。
+\vspace{0.4cm}
+
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{Function: }PB\_type\_program(pulse)}
+The parameter “pulse” is a list(list\_0), and each element is still a list(list\_1) such as [`01010101', { }0, { }0, { }20.0]. The first element is a string that is composed of 8 ‘0’ or ‘1’, and ‘0’ represents low voltage level, ‘1’ represents high voltage level. The second element is 0 as well as the third element. The last element represents time length of the condition, and the unit is nanosecond. For example, if users want to output a pulse signal(high level time is 60.0 ns, low level time is 40.05 ns) in OUT1 channel, they can define pulse=[{ }[`10000000', { }0, { }0, { }60]， [`00000000', { }0, { }0, { }40.05]{ }], and then use function PB\_type\_program(pulse) to download data into the device.
+%参数“pulse”是一个列表（list\_0），列表中的每个元素仍然是一个列表（list\_1），每个list\_1均形如[`01010101', { }0, { }0, { }20.0]。list\_1中的第一个元素为一个字符串，字符串由8个‘0’或‘1’组成，从左往右依次代表8个输出通道，‘0’代表该通道输出低电平，‘1’代表该通道输出高电平。list\_1中的第二和第三个元素没有意义，为0即可。list\_1中的第四个元素代表该方波序列状态的持续时间，单位为纳秒。例如用户想要在OUT1通道输出一个高电平时间长度为60 ns低电平时间为40.05 ns的方波序列，则用户可以令pulse=[{ }[`10000000', { }0, { }0, { }60]， [`00000000', { }0, { }0, { }40.05]{ }]，然后调用PB\_type\_program(pulse) 即可将该方波序列下载到硬件中。
+\vspace{0.4cm}
+
+%\newpage
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{Function: }start()}
+
+Users can call this function after calling PB\_type\_program( ) to make the instrument start playing the sequence.
+%此函数无参数，调用PB\_type\_program( )后，再调用start( )即可向硬件发送指令使仪器开始播放方波序列。
+\vspace{0.4cm}
+
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{Function: }stop()}
+
+Users can call this function to make the instrument stop playing the sequence. If users call start() again after calling stop(), the instrument will start play the sequence again.
+%此函数无参数，用来向硬件发送指令，使仪器停止播放方波。在调用stop( )之后再次调用start( )，可以重新使仪器播放用户自定义的方波序列。
+\vspace{0.4cm}
+
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{The whole process of calling API}}
+
+If Users want to create the pulse signal like Fig 4.2, they can define the sequence using python script, and the whole process is shown as follow. After calling program, user can see the waveform on the oscilloscope.
+%若用户想要生成如图4.2所示的方波序列，可使用接口程序定义方波序列，具体过程如下所示：
+
+fpga = FPGADev( )\qquad          \#Hardware device class instantiation.
+
+pulse = [{ }{ }]\qquad            \#Start defining the sequence.
+
+%pulse.append([`11111110', { }0, { }0, { }7.5])
+%
+%pulse.append([`01111110', { }0, { }0, { }0.05])
+%
+%pulse.append([`00111110', { }0, { }0, { }0.05])
+%
+%pulse.append([`00011110', { }0, { }0, { }0.05])
+%
+%pulse.append([`00000110', { }0, { }0, { }10.0])
+%
+%pulse.append([`11110011', { }0, { }0, { }10.0])
+%
+%pulse.append([`00000000', { }0, { }0, { }1000000])\qquad  \#  以上为定义方波序列
+%
+%PB\_type\_program(pulse)\qquad            \#  下载方波序列
+%
+%start( )\qquad          \#  开始播放方波序列
+%
+%stop( )\qquad     \#  停止播放方波序列,仅在需要停止播放序列时使用
+
+pulse.append({ }[`11110000', { }0, { }0, { }7.50]{ })
+
+pulse.append({ }[`01110000', { }0, { }0, { }0.05]{ })
+
+pulse.append({ }[`00010000', { }0, { }0, { }10.0]{ })
+
+pulse.append({ }[`11000000', { }0, { }0, { }0.05]{ })
+
+pulse.append({ }[`11100000', { }0, { }0, { }9.95]{ })
+
+pulse.append({ }[`00100000', { }0, { }0, { }0.05]{ })
+
+pulse.append({ }[`00000000', { }0, { }0, { }1000000]{ })\qquad    \#  Stop defining the sequence.
+
+fpga.PB\_type\_program(pulse)\qquad            \#  Download the data of the sequence.
+
+fpga.start( )\qquad          \#  Start playing the sequence.
+
+fpga.stop( )\qquad     \#  Stop playing the sequence.
+
+\large
+%\vspace{0.4cm}
+
+%调用接口程序来定义方波序列并控制仪器输出方波序列，将输出通道用同轴线与示波器连接，可以看到仪器输出的方波波形与使用方波编辑软件控制仪器输出的方波波形相同，均为上图4.3所示。
+
+\vspace{0.2cm}
+\section{\heiti API written in C }
+
+We also provide API written in C, so that users can call the program to define the sequence, then they can download the data into the device and play the sequence. The description of the functions is shown as follow. Don't forget that the dynamic range of single pulse is from 7.5 ns to 2.6 s, and the time length must be integral multiple of 0.05 ns.
+%我司为用户提供了C接口程序。用户可调用接口程序中的函数自己编程生成方波序列，并将其下载到硬件中然后控制产品播放生成的方波序列。现将用户所需的函数列出，并作出解释。注意在调用接口程序中的函数时，定义单个方波脉冲高低电平时间必须在7.5 ns至2.6 s之间，且必须是0.05 ns的整数倍。
+
+%\newpage
+\vspace{0.1cm}
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti Function: asg\_program\_all(char **flags,double *time\_length,unsigned long cmd\_num,\\unsigned char **buf,int *buf\_length)}
+\vspace{0.2cm}
+\begin{table}[H]
+%\begin{table}[!htbp]
+\normalsize
+%\caption{}
+%\rowcolors{2}{gray!10}{gray!10}
+\begin{tabular}{|m{6.5cm}<{\centering}|m{7cm}|}
+%\begin{tabular}{p{0.5\textwidth}|p{0.5\textwidth}}
+\rowcolor{blue!50}
+\hline
+Parameters & \makebox[7cm][c]{Description} \\ \hline
+char **flags & “flags” is a double dimensional array, and each element is a string like “01011010”. The number of strings represents the number of pulses, ‘0’(low voltage level) or ‘1’(high voltage level) in each string represents the condition of 8 output channels. \\ \hline
+double *time\_length &“time\_length” is a double-type array. Each element represents the time length of each pulse, and the unit is nanosecond. The length of this array must be equal to “flags”. \\\hline
+unsigned long cmd\_num & “cmd\_num” is a positive integer, that represents the number of the pulses. \\\hline
+unsigned char **buf & “buf” is a double dimensional array, the elements of the array are 8 strings, and the length of each string is 10 times to cmd\_num, but each element of the string is null character. \\\hline
+int *buf\_length & “buf\_length” is \{0,0,0,0,0,0,0,0\}. \\\hline
+\end{tabular}
+\end{table}
+
+%\vspace{0.4cm}
+\newpage
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{Function: }asg\_start( )}
+
+Users can call function asg\_program\_all( ), and then call asg\_start( ) to send instructions to make the instrument start playing the sequence.
+%此函数无参数,调用asg\_program\_all( )后，再调用asg\_start( )即可向硬件发送指令使产品开始播放方波序列。
+
+%\newpage
+\vspace{0.4cm}
+\noindent\fontsize{12pt}{\baselineskip}\textbf{\heiti{Function: }asg\_stop( )}
+
+Users can call this function to make the instrument stop playing the sequence. If users call asg\_start( ) again,  the instrument will start playing the sequence again.
+%此函数无参数，用来向硬件发送指令，使仪器停止播放方波。在调用asg\_stop( )之后再次调用asg\_start( )可以重新使产品播放方波序列。
+
+
+%\newpage
+%\section{\heiti 两种接口程序比较}
+
+%现将Python接口程序与C接口程序中用户需要调用的函数做一对比，方便用户更好的理解调用接口程序的过程。
+%\begin{table}[H]
+%\normalsize
+%\begin{tabular}{|m{1.5cm}<{\centering}|m{5cm}<{\centering}|m{6.5cm}|}
+%\rowcolor{blue!50}
+%\hline
+%接口程序 & \makebox[6.6cm][l]{\qquad\qquad\qquad Python} & \makebox[6.0cm][c]{C}\\ \hline
+%\vspace{-0.4cm}\multirow{4}{1in}{\hspace{0.15cm} 函数名} & PB\_type\_program(pulse)将方波数据下载到硬件中。& asg\_program\_all(char **flags, double *time\_length, unsigned long cmd\_num, unsigned char **buf, int *buf\_length) 用来将方波数据下载到硬件中。\\\cline{2-3}
+%&start( )开始播放方波序列。& asg\_start( )开始播放方波序列。\\\cline{2-3}
+%&stop( )停止播放方波序列。& asg\_stop( )停止播放方波序列。\\
+%\hline
+%\end{tabular}
+%\end{table}
