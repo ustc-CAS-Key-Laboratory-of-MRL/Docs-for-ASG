@@ -96,7 +96,7 @@ We also provide API written in C, so that users can call the program to define t
 \rowcolor{blue!50}
 \hline
 Parameters & \makebox[7cm][c]{Description} \\ \hline
-char **flags & “flags” is a double dimensional array, and each element is a string like “01011010”. The number of strings represents the number of pulses, ‘0’(low voltage level) or ‘1’(high voltage level) in each string represents the condition of 8 output channels. \\ \hline
+char **flags & “flags” is a double dimensional array, and each element is a string like “01011010”. The number of strings represents the number of pulses, ‘0’(low voltage level)  or ‘1’(high voltage level) in each string represents the condition of 8 output channels. \\ \hline
 double *time\_length &“time\_length” is a double-type array. Each element represents the time length of each pulse, and the unit is nanosecond. The length of this array must be equal to “flags”. \\\hline
 unsigned long cmd\_num & “cmd\_num” is a positive integer, that represents the number of the pulses. \\\hline
 unsigned char **buf & “buf” is a double dimensional array, the elements of the array are 8 strings, and the length of each string is 10 times to cmd\_num, but each element of the string is null character. \\\hline
