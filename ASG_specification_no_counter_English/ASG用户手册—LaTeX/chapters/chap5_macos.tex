@@ -2,23 +2,23 @@
 \section{\heiti{Startup}}
 
 \hspace{-0.2cm}You should download the SDK from ``http://www.cypress.com/documentation/
-\\software-and-drivers/ez-usb-fx3-software-development-kit". Then uncompress the 
-\\SDK file：``FX3\_SDK\_MacOS\_v1.3.3.tar.gz" as well as the file：``cyusb\_mac\_1.0.
-\\tar.gz". At this point, you should open the `docs' folder, and refer to `cyusb\_mac\_user
-\\ \_guide.pdf'. You can start from Section 2.1.
+software-and-drivers/ez-usb-fx3-software-development-kit". 
+\\Then uncompress the SDK file：``FX3\_SDK\_MacOS\_v1.3.3.tar.gz".
+\\Then uncompress the file：``cyusb\_mac\_1.0.tar.gz". 
+\\At this point, you should open the `docs' folder, and refer to `cyusb\_mac\_user\_guide.pdf'. You can start from Section 2.1 in that manual.
 
 %\begin{enumerate}
 \noindent {\textcircled{\normalsize{\textbf{1}}}}. Install the library `libusb'.
 
 \noindent {\textcircled{\normalsize{\textbf{2}}}}. Enter the `lib' folder and run `make' command in the terminal. Then copy
 
-\hspace{-0.15cm}the `*.dylib' file to the \/usr\/local\/lib.
+\hspace{-0.15cm}the `*.dylib' file to the /usr/local/lib.
 
-\noindent {\textcircled{\normalsize{\textbf{3}}}}. Copy the configs\/cyusb.conf to \/etc folder.
+\noindent {\textcircled{\normalsize{\textbf{3}}}}. \textbf{Copy the configs/cyusb.conf to /etc folder. You can follow the `cyusb\_mac\_user\_guide.pdf' \indent before this step.}
 
 \noindent {\textcircled{\normalsize{\textbf{4}}}}. Uncompress the file we provided and enter the directory which just be generated
 
-\hspace{-0.15cm}and run `.\/cybulk\_writer 512' command in the terminal. A demo signal is generated
+\hspace{-0.15cm}and run `./cybulk\_writer 512' command in the terminal. A demo signal is generated
 
 \hspace{-0.15cm}by the device and you could see it on the oscilloscope.
 
@@ -26,7 +26,7 @@
 
 \hspace{-0.15cm}the  `examples' directory and run `make' command in the terminal. You will get
 
-\hspace{-0.15cm}many executable files. Then run `.\/cybulk\_writer 512' command again.
+\hspace{-0.15cm}many executable files. Then run `./cybulk\_writer 512' command again.
 %\end{enumerate}
 
 \section{\heiti{API Introduction}}
